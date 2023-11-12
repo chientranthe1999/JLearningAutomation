@@ -80,14 +80,9 @@ public class CourseTest extends BasicTest {
     }
 
     public void enterName(WebElement inputField, int limit) {
-        StringBuilder fakeValue = new StringBuilder("khoá học: ".concat(faker.lorem().paragraph()));
-        while (fakeValue.length() < limit) {
-            fakeValue.append(faker.lorem().paragraph());
-        }
-
-        fakeValue.setLength(limit);
+        String fakeValue = fakeParagraphWithLimit(limit);
         System.out.println("Enter name of course, value: " + fakeValue);
-        inputField.sendKeys(fakeValue.toString());
+        inputField.sendKeys(fakeValue);
     }
 
     public void enterName(WebElement inputField, String text) {

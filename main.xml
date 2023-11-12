@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JLearningTesting">
+    <test name="Course Test">
+        <classes>
+            <class name="jlearning.CourseTest" />
+        </classes>
+    </test> <!-- Test -->
+
+    <test name="Exam Test">
+        <classes>
+            <class name="jlearning.ExamTest" />
+        </classes>
+    </test> <!-- Test -->
+
+    <test name="Payment Test">
+        <classes>
+            <class name="jlearning.PaymentTest" />
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
