@@ -96,8 +96,8 @@ public class ExamTest extends BasicTest {
 
     public void clickSave() {
         System.out.println("Click save");
-        driver.findElement(By.xpath("//body/div[2]/div[3]/div[1]/div[1]/div[2]/button[2]"))
-                .click();
+        WebElement btnSave = driver.findElement(By.xpath("//body/div[2]/div[3]/div[1]/div[1]/div[2]/button[2]"));
+        js.executeScript("arguments[0].click();", btnSave);
     }
 
     @Test

@@ -47,6 +47,7 @@ public abstract class BasicTest {
 
         WebElement lastMessage = errorMessage.get(errorMessage.size() - 1);
         wait.until(ExpectedConditions.visibilityOf(lastMessage));
+        System.out.println("Error message: " + lastMessage.getText());
         return lastMessage.getText();
     }
 
@@ -55,6 +56,7 @@ public abstract class BasicTest {
 
         WebElement lastMessage = successMessages.get(successMessages.size() - 1);
         wait.until(ExpectedConditions.visibilityOf(lastMessage));
+        System.out.println("Message: " + lastMessage.getText());
         return lastMessage.getText();
     }
 
