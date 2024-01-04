@@ -1,7 +1,8 @@
-package jlearning;
+package melbourne;
 
-import com.sat.utils.BasicTest;
-import com.sat.utils.Constant;
+import base.utils.BasicTest;
+import base.utils.Constant;
+import base.utils.Message;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,7 +29,7 @@ public class ExamTest extends BasicTest {
         loginBtn.click();
         System.out.println("Login success " + getSuccessMessage());
 
-        driver.findElement(By.xpath("//span[contains(.,'Bài kiểm tra')]")).click();
+        driver.findElement(By.xpath("//span[contains(.,'Test')]")).click();
 
         System.out.println("Click button add new exam");
         driver.findElement(By.xpath("//div[@id='root']/div[2]/main/div/div/div/div/button")).click();
@@ -102,7 +103,7 @@ public class ExamTest extends BasicTest {
 
     @Test
     public void TC01() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -113,16 +114,17 @@ public class ExamTest extends BasicTest {
         System.out.println("Select course: " + courseVal);
         selectDropdownByText(selectFields.get(0), courseVal);
         System.out.println("Select chapter: " + chapter);
+        System.out.println(selectFields.get(1));
         selectDropdownByText(selectFields.get(1), chapter);
         enterDescription(100);
         clickSave();
 
-        Assert.assertEquals(getSuccessMessage(), "Thêm bài kiểm tra thành công");
+        Assert.assertEquals(getSuccessMessage(), Message.ADD_EXAM_SUCCESS);
     }
 
     @Test
     public void TC02_limit_exam_name() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -137,12 +139,12 @@ public class ExamTest extends BasicTest {
         enterDescription(100);
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Tên bài kiểm tra chỉ được phép từ 10 - 100 ký tự");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_NAME_LIMIT);
     }
 
     @Test
     public void TC03_limit_exam_name() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -157,12 +159,12 @@ public class ExamTest extends BasicTest {
         enterDescription(100);
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Tên bài kiểm tra chỉ được phép từ 10 - 100 ký tự");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_NAME_LIMIT);
     }
 
     @Test
     public void TC04_empty_exam_name() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -176,12 +178,12 @@ public class ExamTest extends BasicTest {
         enterDescription(100);
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Chưa nhập tên bài kiểm tra");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_NAME_EMPTY);
     }
 
     @Test
     public void TC05_empty_exam_name() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -196,12 +198,12 @@ public class ExamTest extends BasicTest {
         enterDescription(100);
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Chưa nhập tên bài kiểm tra");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_NAME_EMPTY);
     }
 
     @Test
     public void TC07_empty_time() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -215,12 +217,12 @@ public class ExamTest extends BasicTest {
         enterDescription(100);
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Chưa nhập thời gian");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_DURATION_EMPTY);
     }
 
     @Test
     public void TC09_empty_course() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -230,12 +232,12 @@ public class ExamTest extends BasicTest {
         enterDescription(100);
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Chưa chọn khóa học");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_COURSE_EMPTY);
     }
 
     @Test
     public void TC11_empty_chapter() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -248,12 +250,12 @@ public class ExamTest extends BasicTest {
         enterDescription(100);
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Chưa chọn chương");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_CHAPTER_EMPTY);
     }
 
     @Test
     public void TC14_limit_description() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -268,12 +270,12 @@ public class ExamTest extends BasicTest {
         enterDescription(201);
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Mô tả bài kiểm tra chỉ được phép từ 10 - 200 ký tự");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_DESCRIPTION_LIMIT);
     }
 
     @Test
     public void TC15_limit_description() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -288,12 +290,12 @@ public class ExamTest extends BasicTest {
         enterDescription(9);
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Mô tả bài kiểm tra chỉ được phép từ 10 - 200 ký tự");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_DESCRIPTION_LIMIT);
     }
 
     @Test
     public void TC16_empty_description() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -307,12 +309,12 @@ public class ExamTest extends BasicTest {
         selectDropdownByText(selectFields.get(1), chapter);
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Chưa nhập mô tả");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_DESCRIPTION_EMPTY);
     }
 
     @Test
     public void TC17_empty_description() throws InterruptedException {
-        String courseVal = "Khóa học N4";
+        String courseVal = "Course N4";
         String chapter = "Chương 1";
 
         loginAdminRoleAndOpenExamAdd();
@@ -327,6 +329,6 @@ public class ExamTest extends BasicTest {
         enterDescription("        ");
         clickSave();
 
-        Assert.assertEquals(getErrorMessage(), "Chưa nhập mô tả");
+        Assert.assertEquals(getErrorMessage(), Message.EXAM_DESCRIPTION_EMPTY);
     }
 }

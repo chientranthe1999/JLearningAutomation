@@ -1,15 +1,15 @@
-package jlearning;
+package melbourne;
 
-import com.sat.utils.BasicTest;
-import com.sat.utils.Constant;
+import base.utils.BasicTest;
+import base.utils.Constant;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Random;
 
 public class PaymentTest extends BasicTest {
     public void loginUserRoleAndGoToCourseList() {
@@ -30,7 +30,7 @@ public class PaymentTest extends BasicTest {
         System.out.println("Click course list");
         driver.findElement(By.xpath("//nav[@id='navbarCollapse']/ul/li[2]/a")).click();
 
-        List<WebElement> btnList = driver.findElements(By.xpath("//button[contains(.,'Mua')]"));
+        List<WebElement> btnList = driver.findElements(By.xpath("//button[contains(.,'Buy')]"));
 
         js.executeScript("arguments[0].scrollIntoView(true);", btnList.get(0));
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});", btnList.get(0));
@@ -39,22 +39,23 @@ public class PaymentTest extends BasicTest {
         wait.until(ExpectedConditions.urlContains(Constant.PAYMENT_URL));
     }
 
+    public String fakePhone() {
+        Random random = new Random();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < 10; i++) {
+            stringBuilder.append(random.nextInt(10)); // Append random digits (0-9)
+        }
+
+        return stringBuilder.toString();
+    }
+
     @Test
     public void TC01_buy_course_successfully() {
         loginUserRoleAndGoToCourseList();
 
-        System.out.println("Click course list");
-        driver.findElement(By.xpath("//nav[@id='navbarCollapse']/ul/li[2]/a")).click();
-
-        List<WebElement> btnList = driver.findElements(By.xpath("//button[contains(.,'Mua')]"));
-
-        js.executeScript("window.scrollTo(0,303.4693298339844)");
-        btnList.get(0).click();
-
-        wait.until(ExpectedConditions.urlContains(Constant.PAYMENT_URL));
-
         System.out.println("Enter phone number");
-        driver.findElement(By.xpath("//div[2]/div/input")).sendKeys(faker.phoneNumber().cellPhone());
+        driver.findElement(By.xpath("//div[2]/div/input")).sendKeys(fakePhone());
 
         System.out.println("Enter address");
         driver.findElement(By.xpath("//textarea")).sendKeys(faker.address().fullAddress());
@@ -88,7 +89,7 @@ public class PaymentTest extends BasicTest {
         wait.until(ExpectedConditions.urlContains(Constant.PAYMENT_RESULT_URL));
         System.out.println("After payment success -> redirect url: " + driver.getCurrentUrl());
 
-        Assert.assertEquals("Đăng ký khóa học thành công", getSuccessMessage());
+        Assert.assertEquals("Successfully registered for the course", getSuccessMessage());
     }
 
     @Test
@@ -101,7 +102,7 @@ public class PaymentTest extends BasicTest {
         System.out.println("Click buy");
         driver.findElement(By.xpath("//button[2]")).click();
 
-        Assert.assertEquals("Chưa nhập số điện thoại", getErrorMessage());
+        Assert.assertEquals("Please enter your phone number", getErrorMessage());
     }
 
     @Test
@@ -117,7 +118,7 @@ public class PaymentTest extends BasicTest {
         System.out.println("Click buy");
         driver.findElement(By.xpath("//button[2]")).click();
 
-        Assert.assertEquals("Số điện thoại không hợp lệ", getErrorMessage());
+        Assert.assertEquals("Invalid phone number", getErrorMessage());
     }
 
     @Test
@@ -133,7 +134,7 @@ public class PaymentTest extends BasicTest {
         System.out.println("Click buy");
         driver.findElement(By.xpath("//button[2]")).click();
 
-        Assert.assertEquals("Số điện thoại không hợp lệ", getErrorMessage());
+        Assert.assertEquals("Invalid phone number", getErrorMessage());
     }
 
     @Test
@@ -146,6 +147,6 @@ public class PaymentTest extends BasicTest {
         System.out.println("Click buy");
         driver.findElement(By.xpath("//button[2]")).click();
 
-        Assert.assertEquals("Chưa nhập địa chỉ", getErrorMessage());
+        Assert.assertEquals("Please enter your address", getErrorMessage());
     }
 }

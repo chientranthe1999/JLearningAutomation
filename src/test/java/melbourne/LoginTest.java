@@ -1,7 +1,7 @@
-package jlearning;
+package melbourne;
 
-import com.sat.utils.BasicTest;
-import com.sat.utils.Constant;
+import base.utils.BasicTest;
+import base.utils.Constant;
 import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -90,7 +90,7 @@ public class LoginTest extends BasicTest {
 
     @Test
     public void TC10_SpaceEmail() {
-        loginCommon("", "");
+        loginCommon("", "1");
         Assert.assertEquals(getErrorMessage(), "Enter your email!");
     }
 

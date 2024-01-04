@@ -1,8 +1,10 @@
-package jlearning;
+package melbourne.course;
 
-import com.sat.utils.BasicTest;
-import com.sat.utils.Constant;
+import base.utils.BasicTest;
+import base.utils.Constant;
+import base.utils.Message;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -30,7 +32,7 @@ public class CourseTest extends BasicTest {
         loginBtn.click();
         System.out.println("Login success " + getSuccessMessage());
 
-        driver.findElement(By.xpath("//span[contains(.,'Khóa học')]")).click();
+        driver.findElement(By.xpath("//span[contains(.,'Course')]")).click();
 
         System.out.println("Click button add new course");
         driver.findElement(By.xpath("//div[@id='root']/div[2]/main/div/div/div/div/button")).click();
@@ -52,7 +54,9 @@ public class CourseTest extends BasicTest {
 
     public void enterDescription(String text) {
         System.out.println("Enter course description, value: " + text);
-        driver.findElement(By.xpath("//textarea")).sendKeys(text);
+        WebElement descriptionField = driver.findElement(By.xpath("//textarea"));
+        descriptionField.sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
+        descriptionField.sendKeys(text);
     }
 
     public void enterPrice(WebElement inputField, int from, int to) {
@@ -105,7 +109,7 @@ public class CourseTest extends BasicTest {
 
         sleep(500);
 
-        Assert.assertEquals("Thêm khóa học thành công", getSuccessMessage());
+        Assert.assertEquals(Message.ADD_COURSE_SUCCESS, getSuccessMessage());
     }
 
     @Test
@@ -121,7 +125,7 @@ public class CourseTest extends BasicTest {
 
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
-        Assert.assertEquals("Tên khóa học chỉ được phép từ 10 -100 ký tự", getErrorMessage());
+        Assert.assertEquals(Message.COURSE_NAME_LIMIT, getErrorMessage());
     }
 
     @Test
@@ -139,7 +143,7 @@ public class CourseTest extends BasicTest {
 
         sleep(500);
 
-        Assert.assertEquals("Tên khóa học chỉ được phép từ 10 -100 ký tự", getErrorMessage());
+        Assert.assertEquals(Message.COURSE_NAME_LIMIT, getErrorMessage());
     }
 
     @Test
@@ -155,7 +159,7 @@ public class CourseTest extends BasicTest {
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
 
-        Assert.assertEquals("Chưa nhập tên khóa học", getErrorMessage());
+        Assert.assertEquals(Message.COURSE_NAME_EMPTY, getErrorMessage());
     }
 
     @Test
@@ -172,7 +176,7 @@ public class CourseTest extends BasicTest {
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
 
-        Assert.assertEquals("Chưa nhập tên khóa học", getErrorMessage());
+        Assert.assertEquals(Message.COURSE_NAME_EMPTY, getErrorMessage());
     }
 
     @Test
@@ -187,7 +191,7 @@ public class CourseTest extends BasicTest {
 
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
-        Assert.assertEquals("Chưa nhập thời gian học", getErrorMessage());
+        Assert.assertEquals(Message.STUDY_TIME_EMPTY, getErrorMessage());
     }
 
     @Test
@@ -203,7 +207,7 @@ public class CourseTest extends BasicTest {
 
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
-        Assert.assertEquals("Thời gian học chỉ từ 1 đến 36 tháng", getErrorMessage());
+        Assert.assertEquals(Message.STUDY_TIME_LIMIT, getErrorMessage());
     }
 
     @Test
@@ -219,7 +223,7 @@ public class CourseTest extends BasicTest {
 
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
-        Assert.assertEquals("Mô tả khóa học chỉ được phép từ 10 - 200 ký tự", getErrorMessage());
+        Assert.assertEquals(Message.COURSE_DESCRIPTION_LIMIT, getErrorMessage());
     }
 
     @Test
@@ -235,7 +239,7 @@ public class CourseTest extends BasicTest {
 
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
-        Assert.assertEquals("Mô tả khóa học chỉ được phép từ 10 - 200 ký tự", getErrorMessage());
+        Assert.assertEquals(Message.COURSE_DESCRIPTION_LIMIT, getErrorMessage());
     }
 
     @Test
@@ -250,7 +254,7 @@ public class CourseTest extends BasicTest {
 
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
-        Assert.assertEquals("Chưa nhập mô tả", getErrorMessage());
+        Assert.assertEquals(Message.COURSE_DESCRIPTION_EMPTY, getErrorMessage());
     }
 
     @Test
@@ -265,7 +269,7 @@ public class CourseTest extends BasicTest {
         enterDescription("        ");
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
-        Assert.assertEquals("Chưa nhập mô tả", getErrorMessage());
+        Assert.assertEquals(Message.COURSE_DESCRIPTION_EMPTY, getErrorMessage());
     }
 
 //    @Test
@@ -295,7 +299,7 @@ public class CourseTest extends BasicTest {
 
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
-        Assert.assertEquals("Chưa chọn ảnh khóa học", getErrorMessage());
+        Assert.assertEquals(Message.PHOTO_EMPTY, getErrorMessage());
     }
 
     @Test
@@ -311,6 +315,6 @@ public class CourseTest extends BasicTest {
 
         driver.findElement(By.xpath("//div[2]/div/button[2]")).click();
         sleep(500);
-        Assert.assertEquals("Chưa chọn ảnh khóa học", getErrorMessage());
+        Assert.assertEquals(Message.PHOTO_WRONG_FORMAT, getErrorMessage());
     }
 }

@@ -1,4 +1,4 @@
-package com.sat.utils;
+package base.utils;
 
 public class Constant {
 

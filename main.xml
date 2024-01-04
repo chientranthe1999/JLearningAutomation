@@ -3,19 +3,19 @@
 <suite name="JLearningTesting">
     <test name="Course Test">
         <classes>
-            <class name="jlearning.CourseTest" />
+            <class name="melbourne.course.CourseTest" />
         </classes>
     </test> <!-- Test -->
 
     <test name="Exam Test">
         <classes>
-            <class name="jlearning.ExamTest" />
+            <class name="melbourne.ExamTest" />
         </classes>
     </test> <!-- Test -->
 
     <test name="Payment Test">
         <classes>
-            <class name="jlearning.PaymentTest" />
+            <class name="melbourne.PaymentTest" />
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

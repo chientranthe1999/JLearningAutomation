@@ -1,7 +1,7 @@
-package jlearning;
+package melbourne;
 
-import com.sat.utils.BasicTest;
-import com.sat.utils.Constant;
+import base.utils.BasicTest;
+import base.utils.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
